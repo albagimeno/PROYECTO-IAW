@@ -8,5 +8,5 @@ else
 	new_pwd=$(tr -dc 'a-zA-Z0-9.!\$' < /dev/random | head -c 8)
 
 	echo "Tu contraseña es: " $new_pwd
-	chpasswd $usuario:$new_pwd
+	echo $usuario:$new_pwd | chpasswd
 fi
