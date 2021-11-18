@@ -5,12 +5,12 @@ echo -n "Seleccione una opcion: "
 read op
 echo -e "\n"
 
-if [ $op==1 ]; then
+if [ $op =1 ]; then
     
     echo -e "\e[31m1. Listado de usuarios\e[0m"
     echo -e "\e[31m======================\e[0m"
     ./listar_usuarios.sh
-elif [ $op==2 ]; then
+elif [ $op = 2 ]; then
     echo -e "\e[31m2. Crear usuarios\e[0m"
     echo -e "\e[31m=================\e[0m"
     ./crear_usuarios.sh

@@ -13,14 +13,16 @@ do
     read nombre
     egrep "$nombre" /etc/passwd >/dev/null
 done
-
+# CONTRASEÑA USUARIO
+echo "Generando contraseña"
+new_pwd=$(tr -dc 'a-zA-Z0-9.!\$' < /dev/random | head -c 8)
 # CREAR USUARIO
 adduser --gecos "$nombre" --no-create-home --home /var/www/$nombre --shell /bin/false $nombre
 # CREAR DIRECTORIOS DE USUARIO
 mkdir -p /var/www/$nombre/{web,blog,files}
 # PERMISOS Y CHROOT
 chown root:root /var/www/$nombre
-chmod 755 /var/www/
+chmod 770 /var/www/$nombre
 chown -R $nombre:$nombre /var/www/$nombre/*
 # CHROOT JAULA SFTP SSH
 echo "Match User $nombre
