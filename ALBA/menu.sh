@@ -11,5 +11,7 @@ if [ $op==1 ]; then
     echo -e "\e[31m======================\e[0m"
     ./listar_usuarios.sh
 elif [ $op==2 ]; then
+    echo -e "\e[31m2. Crear usuarios\e[0m"
+    echo -e "\e[31m=================\e[0m"
     ./crear_usuarios.sh
 fi
