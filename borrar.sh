@@ -5,3 +5,4 @@ then
 	echo "$usuario:DESHABILITADO" | chpasswd
 	a2dissite web_$usuario.conf
 fi
+./menu.sh
