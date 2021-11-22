@@ -4,6 +4,7 @@ if  [ "$usuario" != "" ]
 then
 	userdel $usuario -r
 	a2dissite web_$usuario.conf
+	a2dissite blog_$usuario.conf
 	rm /etc/apache2/sites-available/web_$usuario.conf
 	rm /etc/apache2/sites-available/blog_$usuario.conf
 	rm -R /var/www/$usuario
