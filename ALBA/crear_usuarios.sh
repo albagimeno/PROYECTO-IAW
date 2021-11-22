@@ -14,13 +14,8 @@ do
     egrep "$nombre" /etc/passwd >/dev/null
 done
 
-# CONTRASEÑA USUARIO
-echo "Generando contraseña"
-	new_pwd=$(tr -dc 'a-zA-Z0-9.!\$' < /dev/random | head -c 8)
-	echo "Tu contraseña es: " $new_pwd
-
 # CREAR USUARIO
-adduser --gecos "$nombre" -p $new_pwd --no-create-home --home /var/www/$nombre --shell /bin/false $nombre
+adduser --gecos "$nombre" --no-create-home --home /var/www/$nombre --shell /bin/false $nombre
 # CREAR DIRECTORIOS DE USUARIO
 mkdir -p /var/www/$nombre/{web,blog,files}
 # PERMISOS Y CHROOT
