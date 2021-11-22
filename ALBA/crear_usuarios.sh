@@ -57,5 +57,33 @@ echo "<VirtualHost *:80>
    CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>" >> /etc/apache2/sites-available/blog_$nombre.conf
 
+wget https://wordpress.org/latest.tar.gz /var/www/$nombre/blog/
+tar xvzf latest.tar.gz /var/www/$nombre/blog/
+sudo cp -r /var/www/$nombre/blog/wordpress/* /var/www/$nombre/blog/
+cp /var/www/$nombre/blog/wp-config-sample.php /var/www/$nombre/blog/wp-config.php
+
+
+echo
+"/** The name of the database for WordPress */
+define( 'DB_NAME', 'database_name_here' );
+
+/** MySQL database username */
+define( 'DB_USER', 'username_here' );
+
+/** MySQL database password */
+define( 'DB_PASSWORD', 'password_here' );
+
+/** MySQL hostname */
+define( 'DB_HOST', 'localhost' );
+
+/** Database charset to use in creating database tables. */
+define( 'DB_CHARSET', 'utf8' );
+
+/** The database collate type. Don't change this if in doubt. */
+define( 'DB_COLLATE', '' );" >> /var/www/$nombre/blog/wp-config.php
+
+
+
 a2ensite web_$nombre.conf
 a2ensite blog_$nombre.conf
+systemctl reload apache2
