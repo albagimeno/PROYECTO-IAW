@@ -5,6 +5,8 @@ then
 	userdel $usuario -r
 	a2dissite web_$usuario.conf
 	rm /etc/apache2/sites-available/web_$usuario.conf
+	rm /etc/apache2/sites-available/blog_$usuario.conf
+	rm -R /var/www/$usuario
 	systemctl reload apache2
 	echo "drop database $usuario" | mariadb
 else
