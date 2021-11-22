@@ -13,11 +13,14 @@ do
     read nombre
     egrep "$nombre" /etc/passwd >/dev/null
 done
+
 # CONTRASEÑA USUARIO
 echo "Generando contraseña"
-new_pwd=$(tr -dc 'a-zA-Z0-9.!\$' < /dev/random | head -c 8)
+	new_pwd=$(tr -dc 'a-zA-Z0-9.!\$' < /dev/random | head -c 8)
+	echo "Tu contraseña es: " $new_pwd
+
 # CREAR USUARIO
-adduser --gecos "$nombre" --no-create-home --home /var/www/$nombre --shell /bin/false $nombre
+adduser --gecos "$nombre" -p $new_pwd --no-create-home --home /var/www/$nombre --shell /bin/false $nombre
 # CREAR DIRECTORIOS DE USUARIO
 mkdir -p /var/www/$nombre/{web,blog,files}
 # PERMISOS Y CHROOT
@@ -58,3 +61,6 @@ echo "<VirtualHost *:80>
    ErrorLog ${APACHE_LOG_DIR}/error.log
    CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>" >> /etc/apache2/sites-available/blog_$nombre.conf
+
+a2ensite web_$nombre.conf
+a2ensite blog_$nombre.conf
