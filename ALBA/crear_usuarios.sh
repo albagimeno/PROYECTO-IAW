@@ -16,6 +16,18 @@ done
 
 # CREAR USUARIO
 adduser --gecos "$nombre" --no-create-home --home /var/www/$nombre --shell /bin/false $nombre
+
+echo "Generando contraseña"
+	new_pwd=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c15; echo)
+
+	echo "Tu contraseña es: " $new_pwd
+	echo $usuario:$new_pwd | chpasswd
+
+	echo "Instalando mailutils:"
+	sudo apt-get install mailutils
+	echo -n "Escriba la dirección de correo" correo
+	mail -s "Su nueva contraseña es: $new_pwd" $correo
+	echo "Realizado con exito"
 # CREAR DIRECTORIOS DE USUARIO
 mkdir -p /var/www/$nombre/{web,blog,files}
 # PERMISOS Y CHROOT
@@ -65,13 +77,13 @@ cp /var/www/$nombre/blog/wp-config-sample.php /var/www/$nombre/blog/wp-config.ph
 
 echo
 "/** The name of the database for WordPress */
-define( 'DB_NAME', 'database_name_here' );
+define( 'DB_NAME', 'db_wp_$nombre' );
 
 /** MySQL database username */
-define( 'DB_USER', 'username_here' );
+define( 'DB_USER', '$nombre' );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', 'password_here' );
+define( 'DB_PASSWORD', '$new_pwd' );
 
 /** MySQL hostname */
 define( 'DB_HOST', 'localhost' );
@@ -82,8 +94,17 @@ define( 'DB_CHARSET', 'utf8' );
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );" >> /var/www/$nombre/blog/wp-config.php
 
+mysql -u root -p -e "CREATE DATABASE db_wp_$nombre;"
+mysql -u root -p -e "DROP USER IF EXISTS $nombre; CREATE USER '$nombre'@'%' IDENTIFIED BY '$new_pwd';"
+mysql -u root -p -e "GRANT ALL PRIVILEGES ON db_wp_$nombre.* TO '$nombre'@'%' IDENTIFIED BY '$new_pwd';"
+mysql -u root -p -e "FLUSH PRIVILEGES;"
 
-
-a2ensite web_$nombre.conf
-a2ensite blog_$nombre.conf
-systemctl reload apache2
+# HABILITAR LOS SITIOS WEB AHORA?
+    read -p "Quieres activar los sitios web de $nombre (y/n)" actw
+        if [ $actw = "y" ]; then
+            a2ensite web_$nombre.conf
+            a2ensite blog_$nombre.conf
+            systemctl reload-or-restart apache2
+        else
+            echo "No se activaron los sitios web"
+        fi
