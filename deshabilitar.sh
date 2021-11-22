@@ -4,6 +4,7 @@ if  [ "$usuario" != "" ]
 then
 	echo "$usuario:DESHABILITADO" | chpasswd
 	a2dissite web_$usuario.conf
+	a2dissite blog_$usuario.conf
 	systemctl reload apache2
 else
 	echo "ERROR:no has introducido un usuario"
