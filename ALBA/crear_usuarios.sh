@@ -71,7 +71,7 @@ wget https://wordpress.org/latest.zip -P /var/www/$nombre/
 unzip /var/www/$nombre/latest.zip -d /var/www/$nombre/
 mv /var/www/$nombre/wordpress /var/www/$nombre/blog
 rm /var/www/$nombre/latest.zip
-cp /var/www/$nombre/blog/wp-config-sample.php /var/www/$nombre/blog/wp-config.php
+cp /var/www/$nombre/blog/wordpress/wp-config-sample.php /var/www/$nombre/blog/wordpress/wp-config.php
 
 
 mysql -u root -p -e "CREATE DATABASE db_wp_$nombre;"
