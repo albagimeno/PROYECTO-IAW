@@ -22,12 +22,6 @@ echo "Generando contraseña"
 
 	echo "Tu contraseña es: " $new_pwd
 	echo $usuario:$new_pwd | chpasswd
-
-	echo "Instalando mailutils:"
-	sudo apt-get install mailutils
-	echo -n "Escriba la dirección de correo" correo
-	mail -s "Su nueva contraseña es: $new_pwd" $correo
-	echo "Realizado con exito"
 # CREAR DIRECTORIOS DE USUARIO
 mkdir -p /var/www/$nombre/{web,blog,files}
 # PERMISOS Y CHROOT
