@@ -67,10 +67,10 @@ echo "<VirtualHost *:80>
    CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>" >> /etc/apache2/sites-available/blog_$nombre.conf
 
-            wget https://wordpress.org/latest.zip -P /var/www/$nombre/blog
-            unzip /var/www/$nombre/blog/latest.zip
-            rm /var/www/$nombre/blog/latest.zip
-            mv /var/www/$nombre/blog/wordpress/* /var/www/$nombre/blog/
+wget https://wordpress.org/latest.zip -P /var/www/$nombre/
+unzip /var/www/$nombre/latest.zip -d /var/www/$nombre/
+mv /var/www/$nombre/wordpress /var/www/$nombre/blog
+rm /var/www/$nombre/latest.zip
 cp /var/www/$nombre/blog/wp-config-sample.php /var/www/$nombre/blog/wp-config.php
 
 
