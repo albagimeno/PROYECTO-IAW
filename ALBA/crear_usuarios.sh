@@ -71,7 +71,7 @@ echo "<VirtualHost *:80>
 
 wget https://wordpress.org/latest.tar.gz /var/www/$nombre/blog/
 tar xvzf latest.tar.gz /var/www/$nombre/blog/
-sudo cp -r /var/www/$nombre/blog/wordpress/* /var/www/$nombre/blog/
+cp -r /var/www/$nombre/blog/wordpress/* /var/www/$nombre/blog/
 cp /var/www/$nombre/blog/wp-config-sample.php /var/www/$nombre/blog/wp-config.php
 
 
