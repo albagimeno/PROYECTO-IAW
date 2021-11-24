@@ -14,6 +14,8 @@ do
     egrep "$nombre" /etc/passwd >/dev/null
 done
 
+mkdir -p /var/www/$nombre
+mkdir -p /var/www/$nombre/files
 # CREAR USUARIO
 adduser --gecos "$nombre" --no-create-home --home /var/www/$nombre --shell /bin/false $nombre
 
@@ -34,6 +36,7 @@ echo "Match User $nombre
         PasswordAuthentication yes"\n >> /etc/ssh/sshd_config
 # CONFIG APACHE
 touch /etc/apache2/sites-available/web_$nombre.conf
+mkdir -p /var/www/$nombre/web
 echo "<VirtualHost *:80>
     ServerName $nombre.iaw.com
     ServerAdmin root@localhost
@@ -49,6 +52,7 @@ echo "<VirtualHost *:80>
 </VirtualHost>" >> /etc/apache2/sites-available/web_$nombre.conf
 
 touch /etc/apache2/sites-available/blog_$nombre.conf
+mkdir -p /var/www/$nombre/blog
 echo "<VirtualHost *:80>
     ServerName blog.$nombre.iaw.com
     ServerAdmin root@localhost
