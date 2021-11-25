@@ -5,7 +5,6 @@ echo -n "Escriba el nombre de usuario: "
 read nombre
 egrep "$nombre" /etc/passwd >/dev/null
 
-
 while [ $? -eq 0 ]
 do    
 	echo "El usuario $nombre ya existe"
@@ -26,10 +25,6 @@ echo "Generando contraseña"
 	echo $usuario:$new_pwd | chpasswd
 # CREAR DIRECTORIOS DE USUARIO
 mkdir -p /var/www/$nombre/{web,blog,files}
-# PERMISOS Y CHROOT
-chown root:root /var/www/$nombre
-chmod 770 /var/www/$nombre
-chown -R $nombre:$nombre /var/www/$nombre/*
 # CHROOT JAULA SFTP SSH
 echo "Match User $nombre
         ChrootDirectory /var/www/$nombre/
@@ -106,7 +101,7 @@ mysql -u root -p -e "FLUSH PRIVILEGES;"
 # HABILITAR LOS SITIOS WEB AHORA?
 
 chown root:root /var/www/$nombre
-chmod 770 /var/www/$nombre
+chmod -R 755 /var/www/$nombre
 chown -R $nombre:$nombre /var/www/$nombre/*
 
     read -p "Quieres activar los sitios web de $nombre (y/n)" actw
