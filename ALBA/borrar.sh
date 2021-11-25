@@ -9,7 +9,7 @@ then
 	rm /etc/apache2/sites-available/blog_$usuario.conf
 	rm -R /var/www/$usuario
 	systemctl reload apache2
-	mysql -u root -p -e "drop database db_wp_$usuario"
+	mysql -u root -e "drop database db_wp_$usuario"
 else
 	echo "ERROR:no has introducido un usuario"
 fi

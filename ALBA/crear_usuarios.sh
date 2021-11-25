@@ -72,10 +72,10 @@ rm /var/www/$nombre/latest.zip
 cp /var/www/$nombre/blog/wordpress/wp-config-sample.php /var/www/$nombre/blog/wordpress/wp-config.php
 
 
-mysql -u root -p -e "CREATE DATABASE db_wp_$nombre;"
-mysql -u root -p -e "DROP USER IF EXISTS $nombre; CREATE USER '$nombre'@'%' IDENTIFIED BY '$new_pwd';"
-mysql -u root -p -e "GRANT ALL PRIVILEGES ON db_wp_$nombre.* TO '$nombre'@'%' IDENTIFIED BY '$new_pwd';"
-mysql -u root -p -e "FLUSH PRIVILEGES;"
+mysql -u root -e "CREATE DATABASE db_wp_$nombre;"
+mysql -u root -e "DROP USER IF EXISTS $nombre; CREATE USER '$nombre'@'%' IDENTIFIED BY '$new_pwd';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON db_wp_$nombre.* TO '$nombre'@'%' IDENTIFIED BY '$new_pwd';"
+mysql -u root -e "FLUSH PRIVILEGES;"
 
 echo
 "/** The name of the database for WordPress */
