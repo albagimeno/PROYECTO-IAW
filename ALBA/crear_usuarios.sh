@@ -75,27 +75,31 @@ mysql -u root -e "DROP USER IF EXISTS $nombre; CREATE USER '$nombre'@'%' IDENTIF
 mysql -u root -e "GRANT ALL PRIVILEGES ON db_wp_$nombre.* TO '$nombre'@'%' IDENTIFIED BY '$new_pwd';"
 mysql -u root -e "FLUSH PRIVILEGES;"
 
-echo
-"/** The name of the database for WordPress */
-define( 'DB_NAME', 'db_wp_$nombre' );
+#echo
+#"/** The name of the database for WordPress */
+#define( 'DB_NAME', 'db_wp_$nombre' );
 
-/** MySQL database username */
-define( 'DB_USER', '$nombre' );
+#/** MySQL database username */
+#define( 'DB_USER', '$nombre' );
 
-/** MySQL database password */
-define( 'DB_PASSWORD', '$new_pwd' );
+#/** MySQL database password */
+#define( 'DB_PASSWORD', '$new_pwd' );
 
-/** MySQL hostname */
-define( 'DB_HOST', 'localhost' );
+#/** MySQL hostname */
+#define( 'DB_HOST', 'localhost' );
 
-/** Database charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8' );
+#/** Database charset to use in creating database tables. */
+#define( 'DB_CHARSET', 'utf8' );
 
-/** The database collate type. Don't change this if in doubt. */
-define( 'DB_COLLATE', '' );" >> /var/www/$nombre/blog/wp-config.php
+#/** The database collate type. Don't change this if in doubt. */
+#define( 'DB_COLLATE', '' );" >> /var/www/$nombre/blog/wp-config.php
+
+sed -i "s/database_name_here/db_wp_$nombre/g" "/var/www/$nombre/blog/wordpress/wp-config.php"
+sed -i "s/username_here/$nombre/g" "/var/www/$nombre/blog/wordpress/wp-config.php"
+sed -i "s/password_here/$new_pwd/g" "/var/www/$nombre/blog/wordpress/wp-config.php"
 
 
-# HABILITAR LOS SITIOS WEB AHORA?
+# HA#BILITAR LOS SITIOS WEB AHORA?
 
 chmod -R 755 /var/www/$nombre
 chown -R $nombre:$nombre /var/www/$nombre/*
