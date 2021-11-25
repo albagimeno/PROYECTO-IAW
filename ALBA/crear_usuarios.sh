@@ -53,8 +53,8 @@ touch /etc/apache2/sites-available/blog_$nombre.conf
 echo "<VirtualHost *:80>
     ServerName blog.$nombre.iaw.com
     ServerAdmin root@localhost
-    DocumentRoot "/var/www/$nombre/blog/"
-    <Directory "/var/www/$nombre/blog/">
+    DocumentRoot "/var/www/$nombre/blog/wordpress/"
+    <Directory "/var/www/$nombre/blog/wordpress/">
         Options -Indexes
         DirectoryIndex index.php
         AllowOverride None
@@ -74,25 +74,6 @@ mysql -u root -e "CREATE DATABASE db_wp_$nombre;"
 mysql -u root -e "DROP USER IF EXISTS $nombre; CREATE USER '$nombre'@'%' IDENTIFIED BY '$new_pwd';"
 mysql -u root -e "GRANT ALL PRIVILEGES ON db_wp_$nombre.* TO '$nombre'@'%' IDENTIFIED BY '$new_pwd';"
 mysql -u root -e "FLUSH PRIVILEGES;"
-
-#echo
-#"/** The name of the database for WordPress */
-#define( 'DB_NAME', 'db_wp_$nombre' );
-
-#/** MySQL database username */
-#define( 'DB_USER', '$nombre' );
-
-#/** MySQL database password */
-#define( 'DB_PASSWORD', '$new_pwd' );
-
-#/** MySQL hostname */
-#define( 'DB_HOST', 'localhost' );
-
-#/** Database charset to use in creating database tables. */
-#define( 'DB_CHARSET', 'utf8' );
-
-#/** The database collate type. Don't change this if in doubt. */
-#define( 'DB_COLLATE', '' );" >> /var/www/$nombre/blog/wp-config.php
 
 sed -i "s/database_name_here/db_wp_$nombre/g" "/var/www/$nombre/blog/wordpress/wp-config.php"
 sed -i "s/username_here/$nombre/g" "/var/www/$nombre/blog/wordpress/wp-config.php"
