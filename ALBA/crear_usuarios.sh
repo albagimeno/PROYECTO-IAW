@@ -23,6 +23,9 @@ echo "Generando contraseña"
 
 	echo "Tu contraseña es: " $new_pwd
 	echo $usuario:$new_pwd | chpasswd
+ echo -n "Continuar (guarde la nueva contraseña): "
+ read continuar
+ 
 # CREAR DIRECTORIOS DE USUARIO
 mkdir -p /var/www/$nombre/{web,blog,files}
 # CHROOT JAULA SFTP SSH
