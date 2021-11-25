@@ -21,7 +21,7 @@ adduser --gecos "$nombre" --no-create-home --home /var/www/$nombre --shell /bin/
 echo "Generando contraseña"
 	new_pwd=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c15; echo)
 
-	echo "Tu contraseña es: \e[31m$new_pwd\e[0m"
+	echo "Tu contraseña es: "$new_pwd
 	echo $nombre:$new_pwd | chpasswd
  echo -n "Continuar (guarde la nueva contraseña (pulse ENTER)): "
  read continuar
