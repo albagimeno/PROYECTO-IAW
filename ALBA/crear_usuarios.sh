@@ -33,7 +33,7 @@ chown -R $nombre:$nombre /var/www/$nombre/*
 # CHROOT JAULA SFTP SSH
 echo "Match User $nombre
         ChrootDirectory /var/www/$nombre/
-        PasswordAuthentication yes"\n >> /etc/ssh/sshd_config
+        PasswordAuthentication yes" >> /etc/ssh/sshd_config
 # CONFIG APACHE
 touch /etc/apache2/sites-available/web_$nombre.conf
 mkdir -p /var/www/$nombre/web
