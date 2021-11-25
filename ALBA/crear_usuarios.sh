@@ -84,6 +84,8 @@ sed -i "s/password_here/$new_pwd/g" "/var/www/$nombre/blog/wordpress/wp-config.p
 
 chmod -R 755 /var/www/$nombre
 chown -R $nombre:$nombre /var/www/$nombre/*
+chown root:root /var/www/$nombre/
+chmod -R 770 /var/www/$nombre/*
 
 
     read -p "Quieres activar los sitios web de $nombre (y/n)" actw
