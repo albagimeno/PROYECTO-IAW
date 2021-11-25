@@ -58,7 +58,7 @@ echo "<VirtualHost *:80>
     DocumentRoot "/var/www/$nombre/blog/"
     <Directory "/var/www/$nombre/blog/">
         Options -Indexes
-        DirectoryIndex index.php, index.html
+        DirectoryIndex index.php index.html
         AllowOverride None
     </Directory>
         AssignUserID $nombre $nombre
