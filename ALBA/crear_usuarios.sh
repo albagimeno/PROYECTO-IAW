@@ -28,7 +28,7 @@ echo "Generando contraseña"
 
 # CREAR DIRECTORIOS DE USUARIO
 mkdir -p /var/www/$nombre/{web,blog,files}
-echo "Hola mundo" >> /var/www/$nombre/web/
+echo "Hola mundo" >> /var/www/$nombre/web/index.html
 # CHROOT JAULA SFTP SSH
 echo "Match User $nombre
         ChrootDirectory /var/www/$nombre/
@@ -39,8 +39,8 @@ mkdir -p /var/www/$nombre/web
 echo "<VirtualHost *:80>
     ServerName $nombre.iaw.com
     ServerAdmin root@localhost
-    DocumentRoot "/var/www/$nombre/web"
-    <Directory "/var/www/$nombre/web">
+    DocumentRoot "/var/www/$nombre/web/"
+    <Directory "/var/www/$nombre/web/">
         Options -Indexes
         DirectoryIndex index.html
         AllowOverride None
@@ -55,8 +55,8 @@ mkdir -p /var/www/$nombre/blog
 echo "<VirtualHost *:80>
     ServerName blog.$nombre.iaw.com
     ServerAdmin root@localhost
-    DocumentRoot "/var/www/$nombre/blog"
-    <Directory "/var/www/$nombre/blog">
+    DocumentRoot "/var/www/$nombre/blog/"
+    <Directory "/var/www/$nombre/blog/">
         Options -Indexes
         DirectoryIndex index.php, index.html
         AllowOverride None
