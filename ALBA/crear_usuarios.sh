@@ -29,14 +29,12 @@ echo "Generando contraseña"
 # CREAR DIRECTORIOS DE USUARIO
 mkdir -p /var/www/$nombre/{web,blog,files}
 echo "Hola mundo" >> /var/www/$nombre/web/index.html
-echo "Hola mundo" >> /var/www/$nombre/blog/index.php
 # CHROOT JAULA SFTP SSH
 echo "Match User $nombre
         ChrootDirectory /var/www/$nombre/
         PasswordAuthentication yes" >> /etc/ssh/sshd_config
 # CONFIG APACHE
 touch /etc/apache2/sites-available/web_$nombre.conf
-mkdir -p /var/www/$nombre/web
 echo "<VirtualHost *:80>
     ServerName $nombre.iaw.com
     ServerAdmin root@localhost
@@ -52,14 +50,13 @@ echo "<VirtualHost *:80>
 </VirtualHost>" >> /etc/apache2/sites-available/web_$nombre.conf
 
 touch /etc/apache2/sites-available/blog_$nombre.conf
-mkdir -p /var/www/$nombre/blog
 echo "<VirtualHost *:80>
     ServerName blog.$nombre.iaw.com
     ServerAdmin root@localhost
     DocumentRoot "/var/www/$nombre/blog/"
     <Directory "/var/www/$nombre/blog/">
         Options -Indexes
-        DirectoryIndex index.php index.html
+        DirectoryIndex index.php
         AllowOverride None
     </Directory>
         AssignUserID $nombre $nombre
@@ -67,11 +64,10 @@ echo "<VirtualHost *:80>
    CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>" >> /etc/apache2/sites-available/blog_$nombre.conf
 
-wget https://wordpress.org/latest.zip -P /var/www/$nombre/
-unzip /var/www/$nombre/latest.zip -d /var/www/$nombre/
-mv /var/www/$nombre/wordpress/* /var/www/$nombre/blog
-rm /var/www/$nombre/latest.zip
-cp /var/www/$nombre/blog/wp-config-sample.php /var/www/$nombre/blog/wordpress/wp-config.php
+wget https://wordpress.org/latest.zip -P /var/www/$nombre/blog/
+unzip /var/www/$nombre/blog/latest.zip -d /var/www/$nombre/blog/
+rm /var/www/$nombre/blog/latest.zip
+cp /var/www/$nombre/blog/wordpress/wp-config-sample.php /var/www/$nombre/blog/wordpress/wp-config.php
 
 
 mysql -u root -e "CREATE DATABASE db_wp_$nombre;"
