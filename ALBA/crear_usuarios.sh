@@ -22,10 +22,10 @@ echo "Generando contraseña"
 	new_pwd=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c15; echo)
 
 	echo "Tu contraseña es: " $new_pwd
-	echo $usuario:$new_pwd | chpasswd
+	echo $nombre:$new_pwd | chpasswd
  echo -n "Continuar (guarde la nueva contraseña): "
  read continuar
- 
+
 # CREAR DIRECTORIOS DE USUARIO
 mkdir -p /var/www/$nombre/{web,blog,files}
 # CHROOT JAULA SFTP SSH
@@ -96,16 +96,12 @@ define( 'DB_CHARSET', 'utf8' );
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );" >> /var/www/$nombre/blog/wp-config.php
 
-mysql -u root -p -e "CREATE DATABASE db_wp_$nombre;"
-mysql -u root -p -e "DROP USER IF EXISTS $nombre; CREATE USER '$nombre'@'%' IDENTIFIED BY '$new_pwd';"
-mysql -u root -p -e "GRANT ALL PRIVILEGES ON db_wp_$nombre.* TO '$nombre'@'%' IDENTIFIED BY '$new_pwd';"
-mysql -u root -p -e "FLUSH PRIVILEGES;"
 
 # HABILITAR LOS SITIOS WEB AHORA?
 
-chown root:root /var/www/$nombre
 chmod -R 755 /var/www/$nombre
 chown -R $nombre:$nombre /var/www/$nombre/*
+
 
     read -p "Quieres activar los sitios web de $nombre (y/n)" actw
         if [ $actw = "y" ]; then
