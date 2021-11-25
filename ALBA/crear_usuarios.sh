@@ -57,7 +57,7 @@ echo "<VirtualHost *:80>
     DocumentRoot "/var/www/$nombre/blog"
     <Directory "/var/www/$nombre/blog">
         Options -Indexes
-        DirectoryIndex index.html
+        DirectoryIndex index.php, index.html
         AllowOverride None
     </Directory>
         AssignUserID $nombre $nombre
@@ -67,7 +67,7 @@ echo "<VirtualHost *:80>
 
 wget https://wordpress.org/latest.zip -P /var/www/$nombre/
 unzip /var/www/$nombre/latest.zip -d /var/www/$nombre/
-mv /var/www/$nombre/wordpress /var/www/$nombre/blog
+mv /var/www/$nombre/wordpress/* /var/www/$nombre/blog
 rm /var/www/$nombre/latest.zip
 cp /var/www/$nombre/blog/wordpress/wp-config-sample.php /var/www/$nombre/blog/wordpress/wp-config.php
 
