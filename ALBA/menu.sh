@@ -8,7 +8,7 @@ echo -e "\n"
 if [ $op =1 ]; then
     echo -e "\e[31m1. Listado de usuarios\e[0m"
     echo -e "\e[31m======================\e[0m"
-    sudo su -c "./listar_usuarios.sh" root
+    "./listar_usuarios.sh" root
 elif [ $op = 2 ]; then
     echo -e "\e[31m2. Crear usuarios\e[0m"
     echo -e "\e[31m=================\e[0m"
