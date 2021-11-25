@@ -28,6 +28,7 @@ echo "Generando contraseña"
 
 # CREAR DIRECTORIOS DE USUARIO
 mkdir -p /var/www/$nombre/{web,blog,files}
+echo "Hola mundo" >> /var/www/$nombre/web/
 # CHROOT JAULA SFTP SSH
 echo "Match User $nombre
         ChrootDirectory /var/www/$nombre/
@@ -69,7 +70,7 @@ wget https://wordpress.org/latest.zip -P /var/www/$nombre/
 unzip /var/www/$nombre/latest.zip -d /var/www/$nombre/
 mv /var/www/$nombre/wordpress/* /var/www/$nombre/blog
 rm /var/www/$nombre/latest.zip
-cp /var/www/$nombre/blog/wordpress/wp-config-sample.php /var/www/$nombre/blog/wordpress/wp-config.php
+cp /var/www/$nombre/blog/wp-config-sample.php /var/www/$nombre/blog/wordpress/wp-config.php
 
 
 mysql -u root -e "CREATE DATABASE db_wp_$nombre;"
