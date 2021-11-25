@@ -104,6 +104,11 @@ mysql -u root -p -e "GRANT ALL PRIVILEGES ON db_wp_$nombre.* TO '$nombre'@'%' ID
 mysql -u root -p -e "FLUSH PRIVILEGES;"
 
 # HABILITAR LOS SITIOS WEB AHORA?
+
+chown root:root /var/www/$nombre
+chmod 770 /var/www/$nombre
+chown -R $nombre:$nombre /var/www/$nombre/*
+
     read -p "Quieres activar los sitios web de $nombre (y/n)" actw
         if [ $actw = "y" ]; then
             a2ensite web_$nombre.conf
