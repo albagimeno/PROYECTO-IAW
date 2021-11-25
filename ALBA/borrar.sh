@@ -9,7 +9,7 @@ then
 	rm /etc/apache2/sites-available/blog_$usuario.conf
 	rm -R /var/www/$usuario
 	systemctl reload apache2
-	echo "drop database $usuario" | mariadb
+	echo "drop database db_wp_$usuario" | mariadb
 else
 	echo "ERROR:no has introducido un usuario"
 fi

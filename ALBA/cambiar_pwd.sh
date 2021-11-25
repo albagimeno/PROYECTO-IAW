@@ -15,11 +15,4 @@ done
 	echo "Tu contraseña es: " $new_pwd
 	echo $usuario:$new_pwd | chpasswd
 
-	echo "Instalando mailutils:"
-	sudo apt-get install mailutils
-	echo -n "Escriba la dirección de correo" correo
-	mail -s "Su nueva contraseña es: $new_pwd" $correo
-	echo "Realizado con exito"
-
-
 ./menu.sh
