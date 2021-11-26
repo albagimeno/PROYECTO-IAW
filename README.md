@@ -1,5 +1,5 @@
 # PROYECTO-IAW
-Por: ALBA GIMENO, EDUARDO LÓPEZ, AHMED HASSAN e ISMAEL CASTELLANOS
+Por: [ALBA GIMENO], [EDUARDO LÓPEZ], [AHMED HASSAN] e [ISMAEL CASTELLANOS]
 
 ## Script en BASH para administrar nuestro servidor
    * [Menu principal](menu.sh)<br/>
