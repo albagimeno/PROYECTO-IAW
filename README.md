@@ -1,7 +1,7 @@
 # PROYECTO-IAW
 Por: ALBA GIMENO, EDUARDO LÓPEZ, AHMED HASSAN e ISMAEL CASTELLANOS
 
-## Script en BASH para administrar los usuarios de un servidor
+## Script en BASH para administrar nuestro servidor
    * [Menu principal](menu.sh)<br/>
    * [Listadar usuarios](listar_usuarios.sh)<br/>
    * [Crear usuarios](crear_usuarios.sh)<br/>
